@@ -24,7 +24,7 @@ module Sorcery
 
           def find_by_credentials(credentials)
              sql = @sorcery_config.username_attribute_names.map{|attribute| column_name(attribute) + " = :login"}
-             where(sql.join(' OR '), :login => credentials[0]).first
+             where(sql.join(' OR '), :login => credentials[0]).where(credentials[3]).first
           end
 
           def find_by_sorcery_token(token_attr_name, token)
